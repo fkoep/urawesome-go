@@ -1,0 +1,72 @@
+<div id="current-player">{{$.CurrentPlayer}}</div>
+
+<div id="dices">
+    {{range $dice := $.Dices -}}
+    <div class="dice {{$dice}}"></div>
+    {{- end}}
+</div>
+
+{{range $player,$numPieces := $.Scores}}
+<div id="{{$player}}-score" class="score {{$player}}">
+    {{range loop $numPieces -}}
+        <div class="piece {{$player}}"></div>
+    {{- end}}
+</div>
+{{end}}
+
+{{range $player,$numPieces := $.Stashes}}
+<div id="{{$player}}-stash" class="stash {{$player}}">
+    {{range loop $numPieces -}}
+        <div class="piece {{$player}}"></div>
+    {{- end}}
+</div>
+{{end}}
+
+<div id="board">
+    <div class="row">
+
+    {{- range $i,$tile := $.Board.Tiles -}}
+        {{- if and (ne $i 0) (isMod $i $.Board.Width) -}}
+    </div><div class="row">
+        {{- end}}
+
+        <div class="field {{$tile}}" data-pos="{{$i}}">
+            {{- range $j,$piece := index $.Pieces $i -}}
+            <div class="piece {{$piece.Player}} {{if ne $j 0}} not- {{- end -}} top {{if not $piece.Flipped}} not- {{- end -}} flipped"></div>
+            {{- end}}
+        </div>
+
+    {{end -}}
+    </div>
+</div>
+
+<div id="phase" class="{{$.Phase}}">
+    {{if eq $.Phase "throw-dices"}}
+        <button id="throw-dices" type="input" onclick="ThrowDices()">
+            Throw dices!
+        </button>
+    {{end}}
+
+    {{if eq $.Phase "choose-move"}}
+    <div id="choose-move">
+        {{range $i,$move := $.PossibleMoves}}
+            <button type="button" data-idx="{{$i}}" data-from="{{$move.From}}" data-to="{{$move.To}}" onclick="ChooseMove({{$i}})">
+                [{{$i}}] Move from {{$move.From}} to {{$move.To}}!
+            </button>
+            <br>
+        {{end}}
+    </div>
+    {{end}}
+
+    {{if eq $.Phase "has-won"}}
+    <div id="has-won">
+        Player {{$.CurrentPlayer}} has won!
+    </div>
+    {{end}}
+
+    {{if eq $.Phase "has-conceded"}}
+    <div id="has-conceded">
+        Player {{$.CurrentPlayer}} has conceded!
+    </div>
+    {{end}}
+</div>

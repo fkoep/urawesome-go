@@ -1,0 +1,98 @@
+body {
+    background: lightgrey;
+}
+
+#dices {
+    display: flex;
+}
+#dices:before {
+    content: "Dices:";
+    padding: 15px;
+}
+
+#dices > .dice {
+    width: 20px;
+    height: 50px;
+    margin: 2px;
+}
+#dices > .dice.true {
+    background-color: black;
+}
+#dices > .dice.false {
+    background-color: white;
+}
+
+.piece {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    border: 2px solid grey;
+    opacity: 0.95;
+}
+.piece.white {
+    background: white;
+}
+.piece.black {
+    background: black;
+}
+
+.score, .stash {
+    display: flex;
+    height: 70px;
+}
+#white-score:before {
+    content: "White Score:";
+    padding: 15px;
+}
+#black-score:before {
+    content: "Black Score:";
+    padding: 15px;
+}
+#white-stash:before {
+    content: "White Stash:";
+    padding: 15px;
+}
+#black-stash:before {
+    content: "Black Stash:";
+    padding: 15px;
+}
+.score > .piece, .stash > .piece {
+    margin: 2px;
+}
+
+.row {
+    display: flex;
+}
+
+.field {
+    width: 70px;
+    height: 70px;
+    margin: 1px;
+    border: 2px solid grey;
+    background-size: contain;
+}
+.field.rosetta {
+    background-image: url(rosetta.png);
+}
+.field.four-eyes {
+    background-image: url(four-eyes.png);
+}
+.field.five-dots {
+    background-image: url(five-dots.png);
+}
+.field.pyramid {
+    background-image: url(pyramid.png);
+}
+.field.finish {
+    background-image: url(finish.png);
+}
+.field.four-cinques {
+    background-image: url(four-cinques.png);
+}
+.field.invalid {
+    border-color: transparent !important;
+}
+.field > .piece {
+    float: left;
+}
+

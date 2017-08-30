@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="static/ur.css">
+        <script src="static/jquery-3.2.1.min.js"></script>
+        <script>
+            function ThrowDices() {
+                $.ajax({ 
+                    type: "GET",
+                    url: "throw-dices",
+                    dataType: "html",
+                    success: function(data){
+                        $("#game").html(data);
+                    }
+                });
+            }
+            function ChooseMove(idx) {
+                $.ajax({ 
+                    type: "GET",
+                    url: "choose-move/" + idx,
+                    dataType: "html",
+                    success: function(data){
+                        $("#game").html(data);
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="game">
